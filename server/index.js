@@ -1,16 +1,20 @@
 const express=require("express");
-const mysql=require("mysql");
+const mysql=require("mysql2");
 const cors=require("cors");
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const Insta = require("instamojo-nodejs");
 const url = require('url');
 const open = require('openurl');
+const { Console } = require("console");
+
+require('dotenv').config();
+
 const saltRounds = 10;
 const PORT =process.env.PORT || 8000;
 
-const API_KEY = "test_******";
-const AUTH_KEY = "test_*****";
+const API_KEY = process.env.API_KEY;
+const AUTH_KEY = process.env.AUTH_KEY;
 
 
 Insta.setKeys(API_KEY, AUTH_KEY);
@@ -23,14 +27,23 @@ app.use(express.json())
 var db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '',
-    database : 'ecom-react'
+    password : 'Kumar@123',
+    database : 'ecom'
+  });
+
+  db.connect(function(err) {
+    if (err) {
+      return console.error('error: ' + err.message);
+    }
+  
+    console.log('Connected to the MySQL server.');
   });
 
 app.get("/",(req,res)=>{
     res.send("hi")
 })  
 // get data 
+
 app.get("/getdataall",(req,res)=>{
     let sql=`select * from products`;
     db.query(sql,(err,result)=>{
@@ -359,6 +372,8 @@ app.post("/editadd",(req,res)=>{
 
 
 app.post("/register",(req,res)=>{
+
+    console.log("REQ",req.body);
     const email=req.body.email;
     
     const username=req.body.username;
@@ -376,8 +391,10 @@ app.post("/register",(req,res)=>{
        }
        else{
         let sqll=`select * from users where email='${email}'`;
+        console.log(sqll);
         db.query(sqll,(er,ress)=>{
-            if(ress.length > 0)
+            console.log(ress);
+            if(ress?.length > 0)
             {
                 res.send({msg:"User Email Already Present"})
 
