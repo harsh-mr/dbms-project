@@ -58,6 +58,23 @@ const checkAuth=()=>{
  useEffect(() => {
     getaddress()
  }, [])
+ 
+
+ function phonenumber(inputtxt)
+ {
+    console.log("PHONE",inputtxt);
+   var phoneno = /^\d{10}$/;
+   if(String(inputtxt).match(phoneno))
+         {
+       return true;
+         }
+       else
+         {
+        //  alert("enter valid phone number");
+         return false;
+         }
+ };
+ 
 
 
     const onSub= async(e)=>{
@@ -69,9 +86,14 @@ const checkAuth=()=>{
             address:addr,
             userId:id
         }
-       
-        const res=await axios.post(`http://localhost:8000/editadd`,data)
-        his.push("/payment")
+
+        if( phonenumber(phone)){
+            const res=await axios.post(`http://localhost:8000/editadd`,data)
+            his.push("/payment")
+        }else{
+            alert("enter valid phone number");
+        }
+
          
         }
 
