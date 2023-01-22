@@ -45,14 +45,15 @@ app.get("/",(req,res)=>{
 // get data 
 
 app.get("/getdataall",(req,res)=>{
-    let sql=`select * from products`;
+    // let sql=`select * from products`;
+    let sql = `call getproducts()`;
     db.query(sql,(err,result)=>{
         if(err)
         {
             console.log(err)
         }
         else{
-            res.send(result)
+            res.send(result[0])
         }
     })
 })
@@ -71,14 +72,15 @@ app.get("/getdata",(req,res)=>{
 })
 app.get("/getdata/:id",(req,res)=>{
     const id=req.params.id;
-    let sqll=`select * from products where id=${id}`;
+    // let sqll=`select * from products where id=${id}`;
+    let sqll = `call getproductbyid(${id})`;
     db.query(sqll,(err,result)=>{
         if(err)
         {
             console.log(err)
         }
         else{
-            res.send(result)
+            res.send(result[0])
         }
     })
     
@@ -135,14 +137,15 @@ app.get("/sort/:price",(req,res)=>{
 
 app.get("/getaddress/:userid",(req,res)=>{
     const userid=req.params.userid
-    let sql=`select * from user_data where user_id=${userid}`;
+    // let sql=`select * from user_data where user_id=${userid}`;
+    let sql = `call getaddress(${userid})`;
     db.query(sql,(err,result)=>{
         if(err)
         {
             console.log(err)
         }
         else{
-            res.send(result)
+            res.send(result[0])
         }
     })
 })
@@ -182,16 +185,17 @@ app.get("/myorder/:id",(req,res)=>{
 // post details 
 
 app.post("/addaddress",(req,res)=>{
-    const data={
-        name:req.body.name,
-        email:req.body.email,
-        phone:req.body.phone,
-        address:req.body.address,
-        user_id:req.body.userId
+    
+        const name=req.body.name;
+        const email=req.body.email;
+        const phone=req.body.phone;
+        const address=req.body.address;
+        const user_id=req.body.userId;
 
-    }
-    let sql="INSERT INTO `user_data` SET ?";
-    db.query(sql,data,(err,result)=>{
+    
+    // let sql="INSERT INTO `user_data` SET ?";
+    let sql=`update user_data set name='${name}',email='${email}',phone='${phone}',address='${address}' where user_id=${user_id}`;
+    db.query(sql,(err,result)=>{
         if(err)
         {
             console.log(err)
