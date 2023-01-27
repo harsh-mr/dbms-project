@@ -52,7 +52,7 @@ const Home = () => {
                 <div className="row">
                     <div className="col-md-6 col-12 mb-3 mx-auto">
                         <h1>Welcome to <span>GreenX World</span> </h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, quos.</p>
+                        <p>The perfect destination for eco friendly Products</p>
                         <button className="btn btn-outline-success">Read More</button>
 
                     </div>
@@ -72,8 +72,8 @@ const Home = () => {
                 </div>
                     <div className=" col-md-6 col-12 mx-auto mb-3 d-flex justify-content-center align-items-center flex-column">
                     <h1>Welcome to <span>GreenX World</span> </h1>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat cupiditate aspernatur, aperiam consequatur fugiat nisi! At labore corrupti, non vitae libero obcaecati, necessitatibus, odio facilis aliquid odit nulla porro itaque.</p>
-                        <button className="btn btn-outline-success">Read More</button>
+                        <p>A step closer to protect our mother nature by purchasing eco friendly products from our site</p>
+                        <button className="btn btn-outline-successLorem">Read More</button>
                     </div>
                 </div>
                 </div>
