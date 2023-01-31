@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const MyAccount = () => {
     const [order, setOrder] = useState([])
+    const [toporder,settoporder]=useState('')
    
     const userdatast=localStorage.getItem('EcomUser')
 
@@ -54,9 +55,18 @@ const MyAccount = () => {
         setOrder(res.data)
     }
 
+   const getTopOrder=async(id)=>{
+        
+        const res=await axios.get(`http://localhost:8000/gettoporder/${id}`)
+        console.log(res.data[0]);
+        settoporder(res.data[0])
+    }
+
+    
+
     useEffect(()=>{
         const dat=localStorage.getItem('EcomUserId')
-       
+       getTopOrder(dat)
         getOrderDetails(dat)
     },[])
     if(!order.length)
@@ -83,6 +93,21 @@ const MyAccount = () => {
                     <button className="btn btn-success ml-1 mr-1" disabled>Welcome {userdatast}</button>
                     <button className="btn btn-warning ml-1 mr-1" onClick={logout}>LogOut</button>
                     <br /><br />
+                    <div><table className="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Your Favouite Product</th>
+                                        <th>Id : {toporder?.id}</th>
+                                        <th>Name : {toporder?.name}</th>
+                                        <th>Price : {toporder?.price}</th>
+                                        
+
+
+
+                                    </tr>
+                                </thead>
+                                </table>
+                                </div>
                     <div className="row">
                         <div className="table-responsive">
                             <table className="table table-bordered">

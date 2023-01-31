@@ -53,6 +53,7 @@ app.get("/getdataall",(req,res)=>{
             console.log(err)
         }
         else{
+            console.log(result)
             res.send(result[0])
         }
     })
@@ -150,6 +151,22 @@ app.get("/getaddress/:userid",(req,res)=>{
     })
 })
 
+app.get("/gettoporder/:id",(req,res)=>{
+    const id=req.params.id;
+    let sqll =`select * from products where id = (select o.productid from orderitems as o ,orders as e where o.orderid=e.id and e.userid =${id} group by o.productid ORDER BY COUNT(o.orderid) DESC LIMIT 1  );
+    `
+    db.query(sqll,(err,result)=>{
+        if(err)
+        {
+            console.log(err)
+        }
+        else{
+           
+            res.send(result)
+        }
+    })
+
+})
 
 app.get("/account/:id",(req,res)=>{
     const id=req.params.id;
@@ -372,6 +389,7 @@ app.post("/editadd",(req,res)=>{
     })
 
 })
+
 
 
 

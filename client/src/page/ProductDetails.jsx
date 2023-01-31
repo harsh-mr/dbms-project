@@ -92,7 +92,7 @@ else{
                     <div className="col-md-6 col-12 mx-auto mb-3 d-flex  flex-column mt-5">
                         <h2>{detdata[0].name}</h2>
                         <h4>Price : <strong>{detdata[0].price}.00</strong> </h4>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab quisquam quae ex maiores possimus nihil eum assumenda asperiores! Autem maxime incidunt voluptatibus quidem quaerat corrupti ex natus sed mollitia modi.</p>
+                        <p>All this product are made from recyclabel plastic .while purchasing it you are contibuting to mother nature</p>
                         <form onSubmit={onSub}>
                             <input type="hidden" value={detdata[0].id}  />
                         <div class="form-group w-50">
